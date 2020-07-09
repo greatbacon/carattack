@@ -4,7 +4,7 @@ class IncidentController < ApplicationController
     @incidents = Incident.joins(:reports)
     respond_to do |format|
       format.html
-      format.json { render json: @incidents }
+      format.json { render :json => @incidents.to_json(:include => :reports) }
     end
   end
 
@@ -19,7 +19,7 @@ class IncidentController < ApplicationController
     date = Date.strptime(params[:date], '%m/%d/%Y')
     @incident = Incident.new(date: date,city: params[:city], state: params[:state], lat: lat, long: long, active: false, cop: cop)
     @incident.save
-    @report = Report.new(date: date,incident: @incident, active: false)
+    @report = Report.new(date: date,incident: @incident, source: params[:source], active: false)
     @report.save
     flash.now[:notice] = "Thanks for submitting an incident. Expect it to appaear soon."
     redirect_to("/")
