@@ -32,6 +32,10 @@
 Welcome to the Cool Zone. Help keep track of auto attacks across the country.
 <%= link_to "New Incident", "/incident" %>
 </div>
+<div id="attr"><div class="tableDisplay"><table id="attribute" class="ui small celled unstackable table">
+If there is already a marker for one incident, please don't submit another. All submissions will be manually approved before appearing.
+Kick the tires <a href="https://github.com/greatbacon/carattack">here.</a>
+</div>
 
 <script>
 	var map = L.map('mapid').setView([38.539237, -98.986703], 5);
@@ -41,13 +45,15 @@ Welcome to the Cool Zone. Help keep track of auto attacks across the country.
 			dataType: "json",
 			url: "incident",
 			success: function(data) {
-				$(data).each(function(key, data) {          
-          var statement = 'Protestors attacked on '
-          if (data.cop){
-            var statement = "Protestors attacked by cops on "
-          }
-          L.marker([data.lat, data.long]).addTo(map)
-            .bindPopup(statement + data.date +' in ' + data.city +','+data.state +'. <a href="'+ data.reports[0].source + '">Source</a>' )
+				$(data).each(function(key, data) {
+					if (data.active){
+          	var statement = 'Protestors attacked on '
+          	if (data.cop){
+            	var statement = "Protestors attacked by cops on "
+          	}
+          	L.marker([data.lat, data.long]).addTo(map)
+            	.bindPopup(statement + data.date +' in ' + data.city +','+data.state +'. <a href="'+ data.reports[0].source + '">Source</a>' )
+					}
         });
 			}
 	})

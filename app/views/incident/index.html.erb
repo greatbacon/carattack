@@ -7,23 +7,28 @@
     <%# TODO Add datepicker %>
     <%= label_tag(:date, "Date?") %>
     <%= text_field_tag(:date) %>
+    - The date the attack occured (MM/DD/YYYY)
   </p>
   <p>
     <%= label_tag(:city, "City?") %>
     <%= text_field_tag(:city) %>
+    - What city the attack occured in
   </p>
   <p>
     <%# TODO https://stackoverflow.com/questions/2774841/best-way-to-add-comments-in-erb %>
     <%= label_tag(:state, "State?") %>
     <%= text_field_tag(:state) %>
+    - What state the attack occured
   </p>
   <p>
     <%= label_tag(:cop, "Cop Car?") %>
     <%= check_box_tag(:cop) %>
+    - Check this box if the attacker was cop
   </p>
   <p>
     <%= label_tag(:source, "Source?") %>
     <%= text_field_tag(:source) %>
+    - URL linking to a video of or news source on the attack.
   </p>
   <%= submit_tag("Submit") %>
 </div>
