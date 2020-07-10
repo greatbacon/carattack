@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_201220) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer "incident_id", null: false
+    t.bigint "incident_id", null: false
     t.date "date"
     t.boolean "active"
     t.string "source"

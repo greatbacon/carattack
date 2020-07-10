@@ -13,8 +13,9 @@ class IncidentController < ApplicationController
     # populate incident model & save
     # populate report & save
     # redirict to home
-    lat = 38.539237
-    long = -98.986703
+    results = Geocoder.search("#{params[:city]},#{params[:state]}")
+    lat = results.first.coordinates[0]
+    long = results.first.coordinates[1]
     cop = params[:cop].nil? ? false : true
     date = Date.strptime(params[:date], '%m/%d/%Y')
     @incident = Incident.new(date: date,city: params[:city], state: params[:state], lat: lat, long: long, active: false, cop: cop)
